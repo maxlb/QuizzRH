@@ -1,5 +1,16 @@
 SummitQuizz
 
-Pour lancer le server : SET DEBUG=quizzrh:* npm start
+Pour mettre en place le server :
+
+```
+SET DEBUG=quizzrh
+```   
+```
+npm install
+```
+
+```
+npm start
+```
 
 Maxime the best
