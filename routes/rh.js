@@ -3,7 +3,7 @@ var utils = require('../utils');
 
 var router = express.Router();
 
-/*** GET All User ***/
+/*** GET All RH ***/
 router.get('/', async function(req, res, next) {
   var sql = `SELECT 
               u.iduser,
@@ -11,21 +11,13 @@ router.get('/', async function(req, res, next) {
               u.lastname,
               u.login,
               u.email,
-              p.pseudo,
-              p.location,
-              p.birthdate,
-              p.scoreDev,
-              p.scoreNetwork,
-              p.scoreArchi,
-              p.scoreSocial,
-              p.scoreGlobal,
-              p.Github
+              Rh.company
             FROM User u
-              JOIN Profil p on u.iduser = p.iduser`;
+              JOIN Rh on u.iduser = Rh.iduser`;
   utils.getAll(res,sql);
 });
 
-/*** GET User by ID ***/
+/*** GET RH by ID ***/
 router.get('/:id', function(req, res, next) {
   var sql = `SELECT 
               u.iduser,
@@ -33,17 +25,9 @@ router.get('/:id', function(req, res, next) {
               u.lastname,
               u.login,
               u.email,
-              p.pseudo,
-              p.location,
-              p.birthdate,
-              p.scoreDev,
-              p.scoreNetwork,
-              p.scoreArchi,
-              p.scoreSocial,
-              p.scoreGlobal,
-              p.Github
+              Rh.company
             FROM User u
-              JOIN Profil p on u.iduser = p.iduser
+              JOIN Rh on u.iduser = Rh.iduser
             WHERE u.iduser = ${req.params.id}`;
   utils.getOne(res,sql);
 });
