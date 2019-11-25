@@ -4,17 +4,15 @@ var utils = require('../utils');
 var router = express.Router();
 
 /*** GET All Quizz ***/
-router.get('/', function(req, res, next) {
-  global.connection.query('SELECT * FROM quizz', function (error, results, fields) {
-    res.send(utils.getJSONResponse(error,results));
-  });
+router.get('/', async function(req, res, next) {
+  var sql = `SELECT * FROM quizz`;
+  utils.getAll(res,sql);
 });
 
 /*** GET Quizz by ID ***/
-router.get('/:id/', function(req, res, next) {
-  global.connection.query('SELECT * FROM quizz WHERE idquizz = ' + req.params.id, function (error, results, fields) {
-    res.send(utils.getJSONResponse(error,results[0]));
-  });
+router.get('/:id', function(req, res, next) {
+  var sql = `SELECT * FROM quizz WHERE idquizz = ${req.params.id}`;
+  utils.getOne(res,sql);
 });
 
 module.exports = router;
