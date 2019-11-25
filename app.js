@@ -15,10 +15,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 /*** Connexion à la base de donnée ***/
 app.use(function(req, res, next){
 	global.connection = mysql.createConnection({
-		host     : 'localhost',
-		user     : 'quizzrh',
-		password : 'azerty123',
-		database : 'quizzrh_db'
+		host     : 'benoitjaouen.fr',
+		user     : 'rh',
+		password : 'S4fe_password',
+		database : 'quizz_rh'
 	});
     connection.connect();
 	next();
