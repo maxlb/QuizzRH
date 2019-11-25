@@ -27,12 +27,14 @@ app.use(function(req, res, next){
 /*** Routes ***/
 var indexRouter = require('./routes/index');
 var quizzRouter = require('./routes/quizz');
+var userRouter = require('./routes/user');
 
 /*** Routeur ***/
 app.use('/', indexRouter);
 app.use('/api/v1/quizz', quizzRouter);
 app.use('/api/v1/quizz/:id', quizzRouter);
-
+app.use('/api/v1/user', userRouter);
+app.use('/api/v1/user/:id', userRouter);
 
 
 

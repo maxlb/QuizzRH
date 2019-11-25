@@ -4,7 +4,7 @@ SummitQuizz
 Pour mettre en place le server :
 
 ```
-SET DEBUG=quizzrh
+SET DEBUG=quizzrh:*
 ```   
 ```
 npm install
