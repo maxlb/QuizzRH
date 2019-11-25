@@ -32,12 +32,12 @@ var rhRouter = require('./routes/rh');
 
 /*** Routeur ***/
 app.use('/', indexRouter);
-app.use('/api/v1/quizz', quizzRouter);
-app.use('/api/v1/quizz/:id', quizzRouter);
-app.use('/api/v1/user', userRouter);
-app.use('/api/v1/user/:id', userRouter);
-app.use('/api/v1/rh', rhRouter);
-app.use('/api/v1/rh/:id', rhRouter);
+app.use('/api-quizz/quizz', quizzRouter);
+app.use('/api-quizz/quizz/:id', quizzRouter);
+app.use('/api-quizz/user', userRouter);
+app.use('/api-quizz/user/:id', userRouter);
+app.use('/api-quizz/rh', rhRouter);
+app.use('/api-quizz/rh/:id', rhRouter);
 
 
 
