@@ -1,13 +1,20 @@
-import { Router } from 'express';
-import { getJSONResponse } from 'util'
+var express = require('express');
+var utils = require('../utils');
 
-var router = Router();
+var router = express.Router();
 
 /*** GET All Quizz ***/
 router.get('/', function(req, res, next) {
-  global.connection.query('SELECT * from quizz', function (error, results, fields) {
-    res.send(getJSONResponse(error,results));
+  global.connection.query('SELECT * FROM quizz', function (error, results, fields) {
+    res.send(utils.getJSONResponse(error,results));
   });
 });
 
-export default router;
+/*** GET Quizz by ID ***/
+router.get('/:id/', function(req, res, next) {
+  global.connection.query('SELECT * FROM quizz WHERE idquizz = ' + req.params.id, function (error, results, fields) {
+    res.send(utils.getJSONResponse(error,results[0]));
+  });
+});
+
+module.exports = router;
