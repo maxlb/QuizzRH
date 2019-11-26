@@ -43,11 +43,15 @@ router.get('/lastActive', async function(req, res, next) {
               p.scoreArchi,
               p.scoreSocial,
               p.scoreGlobal,
-              p.Github
+              p.Github,
+              COUNT(a.idQuizz) AS nbQuizz,
+              MAX(a.creationDate) AS dateDernierQuizz,
+              ROUND(AVG(a.score)) AS scoreMoyen
             FROM answered a
               JOIN user u on u.iduser = a.idUser
               JOIN profil p on u.iduser = p.iduser
-            WHERE a.creationDate > DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)`;
+            WHERE a.creationDate > DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)
+            GROUP BY a.idUser`;
   await utils.getAll(sql)
           .then(jsonOK => { res.json(jsonOK) })
           .catch(jsonKO => { res.json(jsonKO) });
