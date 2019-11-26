@@ -6,16 +6,27 @@
 </head>
 
 <body>
-  <h1>API SummitQuizz</h1>
-  <p>Bienvenue sur l'API de SummitQuizz ! Voici la liste des actions possibles via cette API. Chaque appel renvoi un JSON avec un status (status), une erreur (error) et un résultat (response).</p>
+  <h1>Bienvenue sur l'API de SummitQuizz !</h1>
+  <p>Voici la liste des actions possibles via cette API. 
+    Chaque appel renvoie un JSON avec un status (<b>status</b>), une erreur (<b>error</b>) et un résultat (<b>response</b>).</p>
+
+  <h2>Quizz</h2>
   <ul>
-    <li><b>Récupérer tous les quizz :</b> /api-quizz/quizz</li>
-    <li><b>Récupérer un quizz via son id:</b> /api-quizz/quizz/:id</li>
-    <li><b>Récupérer tous les utilisateurs :</b> /api-quizz/user</li>
-    <li><b>Récupérer tous les utilisateurs ayant répondu à un quizz le mois dernier :</b> /api-quizz/user/lastActive</li>
-    <li><b>Récupérer un utilisateur via son id:</b> /api-quizz/user/:id</li>
-    <li><b>Récupérer tous les RH :</b> /api-quizz/rh</li>
-    <li><b>Récupérer un RH via son id:</b> /api-quizz/rh/:id</li>
+    <li><b>api-quizz/quizz</b> : Récupérer tous les quizz </li>
+    <li><b>api-quizz/quizz/:id</b> : Récupérer un quizz via son <b>id</b> </li>
+  </ul>
+
+  <h2>Joueurs</h2>
+  <ul>
+    <li><b>api-quizz/user</b> : Récupérer tous les utilisateurs </li>
+    <li><b>api-quizz/user/lastActive</b> : Récupérer tous les utilisateurs ayant répondu à un quizz le mois dernier </li>
+    <li><b>api-quizz/user/:id</b> : Récupérer un utilisateur via son <b>id</b> </li>
+  </ul>
+
+  <h2>RH</h2>
+  <ul>
+    <li><b>api-quizz/rh</b> : Récupérer tous les RH </li>
+    <li><b>api-quizz/rh/:id</b> : Récupérer un RH via son <b>id</b> </li>
   </ul>
 </body>
 

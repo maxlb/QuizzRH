@@ -4,5 +4,8 @@ body {
 }
 
 b {
-  color: #00B7FF;
+  font-family: monospace; 
+  font-size: large; 
+  color: white; 
+  background-color: gray;
 }

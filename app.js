@@ -37,6 +37,4 @@ app.use('/api-quizz/quizz', quizzRouter);
 app.use('/api-quizz/user', userRouter);
 app.use('/api-quizz/rh', rhRouter);
 
-
-
 module.exports = app;
