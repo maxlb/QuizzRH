@@ -34,11 +34,8 @@ var rhRouter = require('./routes/rh');
 app.use('/', indexRouter);
 app.use('/api-quizz', indexRouter);
 app.use('/api-quizz/quizz', quizzRouter);
-app.use('/api-quizz/quizz/:id', quizzRouter);
 app.use('/api-quizz/user', userRouter);
-app.use('/api-quizz/user/:id', userRouter);
 app.use('/api-quizz/rh', rhRouter);
-app.use('/api-quizz/rh/:id', rhRouter);
 
 
 
