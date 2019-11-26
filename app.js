@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mysql = require('mysql');
+const Database = require('./db');
 
 /*** Initialisation de l'application ***/
 var app = express();
@@ -14,13 +14,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /*** Connexion à la base de donnée ***/
 app.use(function(req, res, next){
-	global.connection = mysql.createConnection({
+	var config = {
 		host     : 'benoitjaouen.fr',
 		user     : 'rh',
 		password : 'S4fe_password',
 		database : 'quizz_rh'
-	});
-    connection.connect();
+	}
+	global.connection = new Database(config);
 	next();
 });
 
@@ -32,6 +32,7 @@ var rhRouter = require('./routes/rh');
 
 /*** Routeur ***/
 app.use('/', indexRouter);
+app.use('/api-quizz', indexRouter);
 app.use('/api-quizz/quizz', quizzRouter);
 app.use('/api-quizz/quizz/:id', quizzRouter);
 app.use('/api-quizz/user', userRouter);

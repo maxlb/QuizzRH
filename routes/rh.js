@@ -11,25 +11,29 @@ router.get('/', async function(req, res, next) {
               u.lastname,
               u.login,
               u.email,
-              Rh.company
-            FROM User u
-              JOIN Rh on u.iduser = Rh.iduser`;
-  utils.getAll(res,sql);
+              rh.company
+            FROM user u
+              JOIN rh on u.iduser = rh.iduser`;
+  await utils.getAll(sql)
+          .then(jsonOK => { res.json(jsonOK) })
+          .catch(jsonKO => { res.json(jsonKO) });
 });
 
 /*** GET RH by ID ***/
-router.get('/:id', function(req, res, next) {
+router.get('/:id', async function(req, res, next) {
   var sql = `SELECT 
               u.iduser,
               u.firstname,
               u.lastname,
               u.login,
               u.email,
-              Rh.company
-            FROM User u
-              JOIN Rh on u.iduser = Rh.iduser
+              rh.company
+            FROM user u
+              JOIN rh on u.iduser = rh.iduser
             WHERE u.iduser = ${req.params.id}`;
-  utils.getOne(res,sql);
+  await utils.getOne(sql)
+          .then(jsonOK => { res.json(jsonOK) })
+          .catch(jsonKO => { res.json(jsonKO) });
 });
 
 module.exports = router;
