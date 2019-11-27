@@ -20,12 +20,27 @@ router.post('/', async function(req, res, next) {
         await utils.getBestUserChatBot(profil)
                 .then(jsonRep => {
                     var bestDev = jsonRep.response;
+                    var url = ''
+                    switch (profil) {
+                        case 'Développeur':
+                            url = 'dev'
+                            break;
+                        case 'Technicien Réseau':
+                            url = 'tech'
+                            break;
+                        case 'Mixte':
+                            url = 'mixte'
+                            break;
+                        default:
+                            url = 'mixte'
+                            break;
+                    }
                     rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
                             Prenom : ${bestDev.firstname}
                             Nom : ${bestDev.lastname}
                             E-Mail : ${bestDev.email}
                             Pseudo SummitQuizz : ${bestDev.pseudo}
-                            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : http://benoitjaouen.fr/${profil}/${niveau}`;
+                            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : http://benoitjaouen.fr/${url}/${niveau}`;
 
                     res.status(200).json({ "fulfillmentText": rep });
                 })
