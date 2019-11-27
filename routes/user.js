@@ -30,54 +30,6 @@ router.get('/', async function(req, res, next) {
           .catch(jsonKO => { res.json(jsonKO) });
 });
 
-/*** GET All Chatbot ***/
-async function getDevChatBot() {
-  var sql = `SELECT 
-              u.firstname,
-              u.lastname,
-              u.email,
-              p.pseudo,
-            FROM user u
-              JOIN profil p on u.iduser = p.iduser
-              ORDER BY p.ScoreDev`
-            
-  await utils.getOne(sql)
-          .then(jsonOK => { return (jsonOK) })
-          .catch(jsonKO => { return (jsonKO) });
-};
-
-/*** GET All Chatbot ***/
-async function getMixteChatBot() {
-  var sql = `SELECT 
-              u.firstname,
-              u.lastname,
-              u.email,
-              p.pseudo,
-            FROM user u
-              JOIN profil p on u.iduser = p.iduser
-              ORDER BY p.ScoreGlobal`
-            
-  await utils.getOne(sql)
-          .then(jsonOK => { return (jsonOK) })
-          .catch(jsonKO => { return (jsonKO) });
-};
-
-/*** GET All Res ***/
-async function getResChatBot() {
-  var sql = `SELECT 
-              u.firstname,
-              u.lastname,
-              u.email,
-              p.pseudo,
-            FROM user u
-              JOIN profil p on u.iduser = p.iduser
-              ORDER BY p.ScoreNetwork`
-            
-  await utils.getOne(sql)
-          .then(jsonOK => { return (jsonOK) })
-          .catch(jsonKO => { return (jsonKO) });
-};
-
 /*** GET last active Users ***/
 router.get('/lastActive', async function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -106,6 +58,58 @@ router.get('/lastActive', async function(req, res, next) {
               JOIN profil p on u.iduser = p.iduser
             WHERE a.creationDate > DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)
             GROUP BY a.idUser`;
+  await utils.getAll(sql)
+          .then(jsonOK => { res.json(jsonOK) })
+          .catch(jsonKO => { res.json(jsonKO) });
+});
+
+router.get('/match/:profil/:score', async function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  
+  var sqlCol = ''
+    switch (req.params.profil) {
+        case 'dev':
+            sqlCol = 'ScoreDev'
+            break;
+        case 'tech':
+            sqlCol = 'scoreNetwork'
+            break;
+        case 'mixte':
+            sqlCol = 'ScoreGlobal'
+            break;
+        case 'archi':
+            sqlCol = 'scoreArchi'
+            break;
+        case 'soc':
+            sqlCol = 'scoreSocial'
+            break;
+        default:
+            sqlCol = 'ScoreGlobal'
+            break;
+    }
+
+  var sql = `SELECT 
+              u.iduser,
+              u.firstname,
+              u.lastname,
+              u.login,
+              u.email,
+              p.pseudo,
+              p.location,
+              p.birthdate,
+              p.scoreDev,
+              p.scoreNetwork,
+              p.scoreArchi,
+              p.scoreSocial,
+              p.scoreGlobal,
+              p.Github,
+              p.scoreKnowledge
+            FROM user u
+              JOIN profil p on u.iduser = p.iduser
+            WHERE p.${sqlCol} >= ${req.params.score}
+              ORDER BY p.${sqlCol} DESC`;
+
   await utils.getAll(sql)
           .then(jsonOK => { res.json(jsonOK) })
           .catch(jsonKO => { res.json(jsonKO) });
@@ -140,3 +144,4 @@ router.get('/:id', async function(req, res, next) {
 });
 
 module.exports = router;
+

@@ -1,9 +1,9 @@
 var express = require('express');
-var user = require('./user');
+var utils = require('../utils');
 
 var router = express.Router();
 
-router.post('/', function(req, res, next) {
+router.post('/', async function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -15,42 +15,22 @@ router.post('/', function(req, res, next) {
 
     if(niveau > 100) {
         rep = `Le niveau maximum est 100 ! Veuillez en saisir un nouveau.`;
+        res.status(200).json({ "fulfillmentText": rep });
     } else {
-        if (profil=="Développeur"){
-                    var bestDev=user.getDevChatBot;
+        await utils.getBestUserChatBot(profil)
+                .then(jsonRep => {
+                    var bestDev = jsonRep.response;
                     rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
-                    Prenom : ${bestDev.firstname} 
-                    Nom : ${bestDev.lastname}
-                    E-Mail : ${bestDev.email}
-                    Pseudo SummitQuizz : ${bestDev.pseudo}
-                    Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : `;
-        }
+                            Prenom : ${bestDev.firstname}
+                            Nom : ${bestDev.lastname}
+                            E-Mail : ${bestDev.email}
+                            Pseudo SummitQuizz : ${bestDev.pseudo}
+                            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : http://benoitjaouen.fr/${profil}/${niveau}`;
 
-        if (profil=="Technicien Réseau"){
-            var bestDev=user.getResChatBot;
-            rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
-            Prenom : ${bestDev.firstname} 
-            Nom : ${bestDev.lastname}
-            E-Mail : ${bestDev.email}
-            Pseudo SummitQuizz : ${bestDev.pseudo}
-            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : `;
-        }
-
-        if (profil=="Mixte"){
-            var bestDev=user.getMixteChatBot;
-            rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
-            Prenom : ${bestDev.firstname} 
-            Nom : ${bestDev.lastname}
-            E-Mail : ${bestDev.email}
-            Pseudo SummitQuizz : ${bestDev.pseudo}
-            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : `;
-        }
-    }
-    
-    
-    
-    res.status(200).json({ "fulfillmentText": rep });
-        
+                    res.status(200).json({ "fulfillmentText": rep });
+                })
+                .catch(err => { res.status(500).json({ "fulfillmentText": rep }); } );
+    } 
 });
-//"fulfillmentText": rep
+
 module.exports = router;
