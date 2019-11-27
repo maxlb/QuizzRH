@@ -1,5 +1,5 @@
 var express = require('express');
-var utils = require('../utils');
+var user = require('./user');
 
 var router = express.Router();
 
@@ -16,9 +16,37 @@ router.post('/', function(req, res, next) {
     if(niveau > 100) {
         rep = `Le niveau maximum est 100 ! Veuillez en saisir un nouveau.`;
     } else {
-        rep = `Merci d'avoir utiliser ce chat, vous allez pouvoir consulter nos meilleurs ${profil} de niveau ${niveau}.
-                Veuillez vous rendre à l'adresse suivante : `;
+        if (profil=="Développeur"){
+                    var bestDev=user.getDevChatBot;
+                    rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
+                    Prenom : ${bestDev.firstname} 
+                    Nom : ${bestDev.lastname}
+                    E-Mail : ${bestDev.email}
+                    Pseudo SummitQuizz : ${bestDev.pseudo}
+                    Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : `;
+        }
+
+        if (profil=="Technicien Réseau"){
+            var bestDev=user.getResChatBot;
+            rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
+            Prenom : ${bestDev.firstname} 
+            Nom : ${bestDev.lastname}
+            E-Mail : ${bestDev.email}
+            Pseudo SummitQuizz : ${bestDev.pseudo}
+            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : `;
+        }
+
+        if (profil=="Mixte"){
+            var bestDev=user.getMixteChatBot;
+            rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
+            Prenom : ${bestDev.firstname} 
+            Nom : ${bestDev.lastname}
+            E-Mail : ${bestDev.email}
+            Pseudo SummitQuizz : ${bestDev.pseudo}
+            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : `;
+        }
     }
+    
     
     
     res.status(200).json({ "fulfillmentText": rep });

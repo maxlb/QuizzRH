@@ -30,6 +30,54 @@ router.get('/', async function(req, res, next) {
           .catch(jsonKO => { res.json(jsonKO) });
 });
 
+/*** GET All Chatbot ***/
+async function getDevChatBot() {
+  var sql = `SELECT 
+              u.firstname,
+              u.lastname,
+              u.email,
+              p.pseudo,
+            FROM user u
+              JOIN profil p on u.iduser = p.iduser
+              ORDER BY p.ScoreDev`
+            
+  await utils.getOne(sql)
+          .then(jsonOK => { return (jsonOK) })
+          .catch(jsonKO => { return (jsonKO) });
+};
+
+/*** GET All Chatbot ***/
+async function getMixteChatBot() {
+  var sql = `SELECT 
+              u.firstname,
+              u.lastname,
+              u.email,
+              p.pseudo,
+            FROM user u
+              JOIN profil p on u.iduser = p.iduser
+              ORDER BY p.ScoreGlobal`
+            
+  await utils.getOne(sql)
+          .then(jsonOK => { return (jsonOK) })
+          .catch(jsonKO => { return (jsonKO) });
+};
+
+/*** GET All Res ***/
+async function getResChatBot() {
+  var sql = `SELECT 
+              u.firstname,
+              u.lastname,
+              u.email,
+              p.pseudo,
+            FROM user u
+              JOIN profil p on u.iduser = p.iduser
+              ORDER BY p.ScoreNetwork`
+            
+  await utils.getOne(sql)
+          .then(jsonOK => { return (jsonOK) })
+          .catch(jsonKO => { return (jsonKO) });
+};
+
 /*** GET last active Users ***/
 router.get('/lastActive', async function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
