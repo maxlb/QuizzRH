@@ -8,12 +8,14 @@ router.post('/', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Credentials', true);
     
-    console.log(req.body.queryResult);
-    console.log(req.body.queryResult.fulfillementMessages);
+    var niveau = req.body.queryResult.outputContexts[0].parameters.number;
+    var profil = req.body.queryResult.outputContexts[0].parameters.Jobs_profil
+    console.log(`Chat reçu : ${profil} de niveau ${niveau}`);
 
+    var rep = `Merci pour ces informations, vous allez apercevoir nos meilleurs ${profil} de niveau ${niveau}`
     res.json({
-        speech: "Merci pour ces informations",
-        displayText: "Merci pour ces informations",
+        speech: rep,
+        displayText: rep,
         source: 'Système SummitRH'
     });
 });
