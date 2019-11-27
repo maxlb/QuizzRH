@@ -21,7 +21,8 @@ router.get('/', async function(req, res, next) {
               p.scoreArchi,
               p.scoreSocial,
               p.scoreGlobal,
-              p.Github
+              p.Github,
+              p.scoreKnowledge
             FROM user u
               JOIN profil p on u.iduser = p.iduser`;
   await utils.getAll(sql)
@@ -48,6 +49,7 @@ router.get('/lastActive', async function(req, res, next) {
               p.scoreSocial,
               p.scoreGlobal,
               p.Github,
+              p.scoreKnowledge
               COUNT(a.idQuizz) AS nbQuizz,
               MAX(a.creationDate) AS dateDernierQuizz,
               ROUND(AVG(a.score)) AS scoreMoyen
@@ -79,7 +81,8 @@ router.get('/:id', async function(req, res, next) {
               p.scoreArchi,
               p.scoreSocial,
               p.scoreGlobal,
-              p.Github
+              p.Github,
+              p.scoreKnowledge
             FROM user u
               JOIN profil p on u.iduser = p.iduser
             WHERE u.iduser = ${req.params.id}`;
