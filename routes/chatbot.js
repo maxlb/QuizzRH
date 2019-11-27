@@ -8,11 +8,18 @@ router.post('/', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Credentials', true);
     
-    var niveau = req.body.queryResult.outputContexts[0].parameters.number;
-    var profil = req.body.queryResult.outputContexts[0].parameters.Jobs_profil
-    console.log(`Chat reçu : ${profil} de niveau ${niveau}`);
+    var rep = '';
+    var params = req.body.queryResult.outputContexts[0].parameters;
 
-    var rep = `Merci pour ces informations, vous allez apercevoir nos meilleurs ${profil} de niveau ${niveau}`
+    if (params) {
+        var niveau = params.number;
+        var profil = params.Jobs_profil;
+        if (niveau && profil) {
+            console.log(`Chat reçu : ${profil} de niveau ${niveau}`);
+            var rep = `Merci d'avoir utiliser ce chat, vous allez pouvoir consulter nos meilleurs ${profil} de niveau ${niveau}.`;
+        }
+    }
+
     res.json({
         speech: rep,
         displayText: rep,
