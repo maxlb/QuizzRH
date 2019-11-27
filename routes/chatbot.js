@@ -3,16 +3,13 @@ var utils = require('../utils');
 
 var router = express.Router();
 
-router.post('/chatbot', function(req, res) {
-    console.log('ok');
+router.post('/', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Credentials', true);
     
-    console.log(req.body);
-    //console.log(req.body.result.parameters["rating"]);
-    //console.log(req.body.result.parameters["comments"]);
-    //console.log(req.body.result.parameters["resort-location"]);
+    console.log(req.body.queryResult);
+    console.log(req.body.queryResult.fulfillementMessages);
 
     res.json({
         speech: "Merci pour ces informations",

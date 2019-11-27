@@ -36,27 +36,11 @@ var rhRouter    = require('./routes/rh');
 var chatRouter  = require('./routes/chatbot');
 
 /*** Routeur ***/
-app.use('/api-quizz/chatbot', 	chatRouter);
 app.use('/'					, 	indexRouter);
 app.use('/api-quizz'		, 	indexRouter);
 app.use('/api-quizz/quizz'	, 	quizzRouter);
 app.use('/api-quizz/user'	, 	userRouter);
 app.use('/api-quizz/rh'		, 	rhRouter);
+app.use('/api-quizz/chatbot', 	chatRouter);
 
-/*
-app.post('/api-quizz/chatbot', (req, res) => {
-    console.log('ok');
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    
-    console.log(req.body);
-
-    res.json({
-        speech: "Merci pour ces informations",
-        displayText: "Merci pour ces informations",
-        source: 'Système SummitRH'
-    });
-});
-*/
 module.exports = app;
