@@ -5,6 +5,8 @@ var router = express.Router();
 
 /*** GET All User ***/
 router.get('/', async function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET');
   var sql = `SELECT 
               u.iduser,
               u.firstname,
@@ -29,6 +31,8 @@ router.get('/', async function(req, res, next) {
 
 /*** GET last active Users ***/
 router.get('/lastActive', async function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET');
   var sql = `SELECT 
               a.idUser,
               u.firstname,
@@ -59,6 +63,8 @@ router.get('/lastActive', async function(req, res, next) {
 
 /*** GET User by ID ***/
 router.get('/:id', async function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET');
   var sql = `SELECT 
               u.iduser,
               u.firstname,

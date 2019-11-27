@@ -5,6 +5,8 @@ var router = express.Router();
 
 /*** GET All Quizz ***/
 router.get('/', async function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET');
   var sql = `SELECT * FROM quizz`;
   await utils.getAll(sql)
           .then(jsonOK => { res.json(jsonOK) })
@@ -13,6 +15,8 @@ router.get('/', async function(req, res, next) {
 
 /*** GET Quizz by ID ***/
 router.get('/:id', async function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET');
   var sql = `SELECT * FROM quizz WHERE idquizz = ${req.params.id}`;
   await utils.getOne(sql)
           .then(jsonOK => { res.json(jsonOK) })
