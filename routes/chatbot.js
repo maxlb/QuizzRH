@@ -35,10 +35,11 @@ router.post('/', async function(req, res, next) {
                             url = 'mixte'
                             break;
                     }
-                    rep = `Merci d'avoir utiliser ce chat, voici notre meilleur profil ${profil} correspondant à votre demande :
-                            ${bestDev.firstname}  ${bestDev.lastname}  (${bestDev.pseudo}) - ${bestDev.email}
+                    rep = `Voici notre meilleur profil ${profil} correspondant à votre demande :
+                            ${bestDev.firstname}  ${bestDev.lastname} - ${bestDev.email} (Pseudo Summit Quizz : ${bestDev.pseudo}).
                                         
-                            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : http://benoitjaouen.fr/${url}/${niveau}`;
+                            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : http://benoitjaouen.fr/${url}/${niveau} .
+                            Merci d'avoir utilisé SummitRH !`;
 
                     res.status(200).json({ "fulfillmentText": rep });
                 })
