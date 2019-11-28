@@ -38,7 +38,7 @@ router.post('/', async function(req, res, next) {
                     rep = `Voici notre meilleur profil ${profil} correspondant à votre demande :
                             ${bestDev.firstname}  ${bestDev.lastname} - ${bestDev.email} (Pseudo Summit Quizz : ${bestDev.pseudo}).
                                         
-                            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : http://benoitjaouen.fr/${url}/${niveau} .
+                            Vous pouvez consulter l'ensemble des profils proposés en vous rendant à l'adresse suivante : http://benoitjaouen.fr/home/${url}/${niveau} .
                             Merci d'avoir utilisé SummitRH !`;
 
                     res.status(200).json({ "fulfillmentText": rep });
